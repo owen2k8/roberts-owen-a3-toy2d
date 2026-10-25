@@ -15,7 +15,8 @@ namespace MohawkGame2D
         /// </summary>
         public void Setup()
         {
-
+            Window.SetSize(800, 600);
+            Window.ClearBackground(79, 79, 79);
         }
 
         /// <summary>
@@ -24,6 +25,18 @@ namespace MohawkGame2D
         public void Update()
         {
 
+            float x = Input.GetMousePosition().X;
+            float y = Input.GetMousePosition().Y;
+
+            Console.WriteLine(x);
+            Console.WriteLine(y);
+
+            Draw.SetLineSize(30);
+            Draw.SetLineColor(51, 51, 51);
+            Draw.Line(0, 0, 800, 0);
+            Draw.Line(0, 600, 800, 600);
+            Draw.Line(0, 0, 0, 600);
+            Draw.Line(800, 0, 800, 600);
         }
     }
 
