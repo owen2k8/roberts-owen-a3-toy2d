@@ -28,7 +28,90 @@ namespace MohawkGame2D
         /// <summary>
         ///     Update runs every frame.
         /// </summary>
-        
+
+        string correct_answer_shape = "placeholder";
+        int correct_answer_number = -1;
+        bool question_answered = true;
+        bool ui_visualized = false;
+
+        public void SelectQuestion()
+        {
+            //int question = Random.Integer(0, 1);
+            int question = 0;
+
+            if (question == 0)
+            {
+                Text.Draw("What shape is this?", 250, 185);
+
+                //int correct_element = Random.Integer(0, 1);
+                int correct_element = 0;
+                int random_colour = Random.Integer(0, 3);
+
+                if (random_colour == 0)
+                {
+                    Draw.SetFillColor(235, 64, 52);
+                }
+                else if (random_colour == 1)
+                {
+                    Draw.SetFillColor(52, 137, 235);
+                }
+                else if (random_colour == 2)
+                {
+                    Draw.SetFillColor(52, 235, 101);
+                }
+                else if (random_colour == 3)
+                {
+                    Draw.SetFillColor(235, 52, 229);
+                }
+
+                if (correct_element == 0)
+                {
+                    int shape = Random.Integer(0, 3);
+                    if (shape == 0)
+                    {
+                        correct_answer_shape = "Square";
+
+                        Draw.SetLineSize(0);
+                        Draw.Square(345, 245, 130);
+                        Text.Color = Color.White;
+                        Text.Draw(Random.Integer(1,4).ToString(), 400, 300);
+
+                    }
+                    else if (shape == 1) 
+                    {
+                        correct_answer_shape = "Circle";
+
+                        Draw.SetLineSize(0);
+                        Draw.Circle(400, 300, 70);
+                        Text.Color = Color.White;
+                        Text.Draw(Random.Integer(1, 4).ToString(), 390, 285);
+
+                    }
+                    else if (shape == 2)
+                    {
+                        correct_answer_shape = "Triangle";
+
+                        Draw.SetLineSize(0);
+                        Draw.Triangle(350, 350, 450, 350, 400, 220);
+                        Text.Color = Color.White;
+                        Text.Draw(Random.Integer(1, 4).ToString(), 390, 285);
+
+                    }
+                    else if (shape == 3)
+                    {
+                        correct_answer_shape = "Diamond";
+
+                        Draw.SetLineSize(0);
+                        Draw.Quad(400, 350, 400, 240, 450, 300, 350, 300);
+                        Text.Color = Color.White;
+                        Text.Draw(Random.Integer(1, 4).ToString(), 390, 285);
+
+                    }
+                }
+            }
+
+        }
+
         public void DrawShape(string shape)
         {
             if (shape == "Square")
@@ -75,23 +158,27 @@ namespace MohawkGame2D
             //Console.WriteLine(x);
             //Console.WriteLine(y);
 
-            Draw.SetLineSize(30);
-            Draw.SetLineColor(51, 51, 51);
-            Draw.Line(0, 0, 800, 0);
-            Draw.Line(0, 600, 800, 600);
-            Draw.Line(0, 0, 0, 600);
-            Draw.Line(800, 0, 800, 600);
+            if (ui_visualized == false)
+            {
+                Draw.SetLineSize(30);
+                Draw.SetLineColor(51, 51, 51);
+                Draw.Line(0, 0, 800, 0);
+                Draw.Line(0, 600, 800, 600);
+                Draw.Line(0, 0, 0, 600);
+                Draw.Line(800, 0, 800, 600);
 
-            Draw.SetLineSize(0);
-            Draw.SetFillColor(51, 51, 51);
-            Draw.Rectangle(240, 180, 340, 240);
-            Text.Color = Color.White;
-            Text.Draw("What shape is this?", 250, 185);
+                Draw.SetLineSize(0);
+                Draw.SetFillColor(51, 51, 51);
+                Draw.Rectangle(240, 180, 340, 240);
+                Text.Color = Color.White;
+                Text.Draw("What shape is this?", 250, 185);
 
-            DrawShape("Square");
-            DrawShape("Circle");
-            DrawShape("Triangle");
-            DrawShape("Diamond");
+                DrawShape("Square");
+                DrawShape("Circle");
+                DrawShape("Triangle");
+                DrawShape("Diamond");
+                ui_visualized = true;
+            }
 
             if (Input.IsMouseButtonPressed(MouseButton.Left))
             {
@@ -115,6 +202,12 @@ namespace MohawkGame2D
                 {
                     Console.WriteLine("pink");
                 }
+            }
+
+            if (question_answered == true)
+            {
+                SelectQuestion();
+                question_answered = false;
             }
         }
     }
